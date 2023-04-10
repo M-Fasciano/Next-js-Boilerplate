@@ -16,6 +16,7 @@ interface IBtnProps
   rounded?: boolean;
   size?: 'sm' | 'md' | 'lg';
   submit?: boolean;
+  icon?: React.ReactNode;
 }
 
 type ButtonRef = React.ForwardedRef<HTMLButtonElement>;
@@ -31,6 +32,7 @@ const Button = React.forwardRef(
       rounded,
       size = 'md',
       submit,
+      icon,
       ...props
     }: IBtnProps,
     ref: ButtonRef
@@ -51,6 +53,8 @@ const Button = React.forwardRef(
       }`}
       color={color}
     >
+      {icon}
+      {icon ? ' ' : null}
       {children}
     </button>
   )
