@@ -19,8 +19,6 @@ module.exports = withBundleAnalyzer({
       {
         protocol: 'https',
         hostname: 'picsum.photos',
-        port: '',
-        pathname: '/960/480',
       },
     ],
   },
