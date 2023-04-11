@@ -15,6 +15,7 @@ const singleCard = (
     imgAlt="Card image"
     title="Card title"
     text="Proin faucibus arcu quis ante. Aenean commodo ligula eget dolor. Aliquam eu nunc. Sed aliquam ultrices mauris. Fusce vulputate eleifend sapien."
+    cta="View details"
   />
 ) as JSX.Element;
 

@@ -9,6 +9,7 @@ interface ICardProps {
   className?: string;
   imgSrc?: string;
   imgAlt?: string;
+  cta?: React.ReactNode;
 }
 
 function Card(props: ICardProps) {
@@ -17,6 +18,7 @@ function Card(props: ICardProps) {
     text,
     imgSrc = 'https://picsum.photos/960/480',
     imgAlt = 'Card image',
+    cta,
   } = props;
 
   return (
@@ -34,6 +36,7 @@ function Card(props: ICardProps) {
       <div className={`${style.cardBody}`}>
         {title ? <div className={`${style.cardTitle}`}>{title}</div> : null}
         {text ? <div className={`${style.cardText}`}>{text}</div> : null}
+        {cta ? <a className={`${style.cardCta}`}>{cta}</a> : null}
       </div>
     </div>
   );
