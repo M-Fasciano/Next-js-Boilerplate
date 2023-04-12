@@ -21,5 +21,6 @@ module.exports = withBundleAnalyzer({
         hostname: 'picsum.photos',
       },
     ],
+    unoptimized: true,
   },
 });
