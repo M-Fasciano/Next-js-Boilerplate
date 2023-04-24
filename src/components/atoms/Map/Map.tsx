@@ -1,9 +1,11 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-import { useRouter } from 'next/router';
-import React from 'react';
-import ReactMapGL, { Marker, NavigationControl } from 'react-map-gl';
+import mapboxgl from 'mapbox-gl';
+import React, { useEffect, useRef } from 'react';
+import ReactDOM from 'react-dom';
+
+import Marker from '../Marker';
 
 export const markers = [
   {
@@ -20,38 +22,46 @@ export const markers = [
   },
 ];
 
+const geojson = {
+  type: 'Feature',
+  features: markers.map((marker) => ({
+    geometry: {
+      type: 'Point',
+      coordinates: {
+        lat: marker.lat,
+        lng: marker.long,
+      },
+    },
+  })),
+};
+
+mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_GL_ACCESS_TOKEN as string;
+
 function Map() {
-  const router = useRouter();
+  const mapContainer = useRef<any>(null);
+  const map = useRef<mapboxgl.Map | any>(null);
 
-  return (
-    <div className="relative h-[50vh]">
-      <ReactMapGL
-        initialViewState={{
-          longitude: -0.127758,
-          latitude: 51.507351,
-          zoom: 10,
-        }}
-        mapStyle="mapbox://styles/mapbox/streets-v9"
-        mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_GL_ACCESS_TOKEN}
-      >
-        <NavigationControl />
+  useEffect(() => {
+    if (map.current) return; // initialize map only once
+    map.current = new mapboxgl.Map({
+      container: mapContainer.current,
+      style: 'mapbox://styles/mapbox/streets-v12',
+      center: [-0.127758, 51.507351],
+      zoom: 10,
+    });
 
-        {markers.map((marker) => (
-          <Marker
-            key={marker.lat}
-            longitude={marker.long}
-            latitude={marker.lat}
-            anchor="bottom"
-          >
-            <img
-              src={`${router.basePath}/assets/images/marker.svg`}
-              alt="marker"
-            />
-          </Marker>
-        ))}
-      </ReactMapGL>
-    </div>
-  );
+    geojson.features.forEach((marker) => {
+      // create a DOM element for the marker
+      const markerIcon = document.createElement('div');
+      ReactDOM.render(<Marker />, markerIcon);
+
+      new mapboxgl.Marker(markerIcon)
+        .setLngLat(marker.geometry.coordinates)
+        .addTo(map.current);
+    });
+  });
+
+  return <div className="relative h-[50vh]" ref={mapContainer} />;
 }
 
 export default Map;
