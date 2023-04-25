@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 
+import SearchBox from '@/components/molecules/SearchBox';
 import { Meta } from '@/layouts/Meta';
 import { Main } from '@/templates/Main';
 
@@ -24,6 +25,7 @@ const Index = () => {
       <h2 className="text-2xl font-bold">
         Boilerplate code for your Nextjs project with Tailwind CSS
       </h2>
+      <SearchBox />
       <p>
         <span role="img" aria-label="rocket">
           🚀
