@@ -1,26 +1,24 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { useRouter } from 'next/router';
-import React from 'react';
-import type { SubmitHandler } from 'react-hook-form';
-import { useForm } from 'react-hook-form';
+import React, { useState } from 'react';
 
 import Button from '@/components/atoms/Button';
 
-type Inputs = {
-  example: string;
-};
-
-function SearchBox() {
+function SearchBox({ setResults }: any) {
   const router = useRouter();
-  const { register, handleSubmit } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = (data) => data;
-  // console.log(data);
+  const [query, setQuery] = useState('');
+  const accessToken = process.env.NEXT_PUBLIC_MAPBOX_GL_ACCESS_TOKEN;
+  const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${query}.json?access_token=${accessToken}`;
+
+  async function handleSearch() {
+    const response = await fetch(url);
+    const data = await response.json();
+    setResults(data.features);
+    console.log('data', data);
+  }
 
   return (
-    /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
-    <form onSubmit={handleSubmit(onSubmit)}>
-      {/* register your input into the hook by invoking the "register" function */}
-
+    <>
       <label
         htmlFor="search"
         className="sr-only mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -35,21 +33,22 @@ function SearchBox() {
           />
         </div>
         <input
-          type="search"
+          type="text"
+          value={query}
+          onChange={(event) => setQuery(event.target.value)}
           id="search"
           className="block w-full rounded-lg border border-gray-300 p-4 pl-10 text-sm dark:border-gray-600 dark:text-black dark:placeholder:text-gray-700"
           placeholder="Search for trainers by postcode, town, city"
           required
-          {...register('example')}
         />
 
         <div className="absolute bottom-2.5 right-2.5">
-          <Button color="success" size="sm" submit>
+          <Button onClick={handleSearch} color="success" size="sm" submit>
             Search
           </Button>
         </div>
       </div>
-    </form>
+    </>
   );
 }
 
