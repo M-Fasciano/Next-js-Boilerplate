@@ -11,32 +11,32 @@ export const style = {
   },
   color: {
     primary: {
-      bg: `text-white border-blue-700 bg-blue-700 hover:bg-transparent hover:text-blue-700`,
+      bg: `text-white border-blue-700 bg-blue-700`,
       outline: `border-blue-700 border-2 text-blue-700 hover:bg-blue-700 hover:text-white`,
       disabled: `text-white border-blue-700 bg-blue-700`,
     },
     success: {
-      bg: `text-white border-green-700 bg-green-700 hover:bg-transparent hover:text-green-700`,
+      bg: `text-white border-green-700 bg-green-700`,
       outline: `border-green-700 border-2 text-green-700 hover:bg-green-700 hover:text-white`,
       disabled: `text-white border-green-700 bg-green-700`,
     },
     danger: {
-      bg: `text-white border-red-600 bg-red-600 hover:bg-transparent hover:text-red-600`,
+      bg: `text-white border-red-600 bg-red-600`,
       outline: `border-red-600 border-2 text-red-600 hover:bg-red-600 hover:text-white`,
       disabled: `text-white border-red-600 bg-red-600`,
     },
     dark: {
-      bg: `text-white border-black bg-black hover:bg-transparent hover:text-black`,
+      bg: `text-white border-black bg-black`,
       outline: `border-black border-2 text-gray-900 hover:bg-black hover:text-white`,
       disabled: `text-white border-black bg-black`,
     },
     warning: {
-      bg: `text-white border-yellow-500 bg-yellow-500 hover:bg-transparent hover:text-yellow-500`,
+      bg: `text-white border-yellow-500 bg-yellow-500`,
       outline: `border-yellow-500 border-2 text-yellow-500 hover:bg-yellow-500 hover:text-white`,
       disabled: `text-white border-yellow-500 bg-yellow-500`,
     },
     indigo: {
-      bg: `text-white border-indigo-900 bg-indigo-900 hover:bg-transparent hover:text-indigo-900`,
+      bg: `text-white border-indigo-900 bg-indigo-900`,
       outline: `border-indigo-900 border-2 text-indigo-900 hover:bg-indigo-900 hover:text-white`,
       disabled: `text-white border-indigo-900 bg-indigo-900`,
     },
