@@ -42,7 +42,7 @@ function Map(results: any) {
   const map = useRef<mapboxgl.Map | any>(null);
 
   const lat = results.results[0].center[1];
-  const long = results.results[0].center[0];
+  const lng = results.results[0].center[0];
 
   const geojson = {
     type: 'Feature',
@@ -52,7 +52,7 @@ function Map(results: any) {
           type: 'Point',
           coordinates: {
             lat,
-            lng: long,
+            lng,
           },
         },
       },
@@ -63,7 +63,7 @@ function Map(results: any) {
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
       style: 'mapbox://styles/mapbox/streets-v12',
-      center: [long, lat],
+      center: [lng, lat],
       zoom: 10,
     });
 
@@ -77,7 +77,7 @@ function Map(results: any) {
         .setLngLat(marker.geometry.coordinates)
         .addTo(map.current);
     });
-  }, [lat, long]);
+  }, [lat, lng]);
 
   return <div className="relative h-[50vh]" ref={mapContainer} />;
 }
