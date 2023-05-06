@@ -14,7 +14,6 @@ function SearchBox({ setResults }: any) {
     const response = await fetch(url);
     const data = await response.json();
     setResults(data.features);
-    console.log('data', data);
   }
 
   return (
