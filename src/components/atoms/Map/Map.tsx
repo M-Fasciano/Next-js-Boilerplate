@@ -10,15 +10,18 @@ import Marker from '../Marker';
 export const markers = [
   {
     lat: 51.550293,
-    long: -0.1513039,
+    lng: -0.1513039,
+    name: 'Ellie Ford',
   },
   {
     lat: 51.531207,
-    long: 0.00619,
+    lng: 0.00619,
+    name: 'John Smith',
   },
   {
     lat: 51.477463,
-    long: -0.079471,
+    lng: -0.079471,
+    name: 'Jane Doe',
   },
 ];
 
@@ -29,10 +32,11 @@ const geojson = {
       type: 'Point',
       coordinates: {
         lat: marker.lat,
-        lng: marker.long,
+        lng: marker.lng,
       },
       properties: {
         id: i,
+        name: marker.name,
       },
     },
   })),
@@ -41,27 +45,18 @@ const geojson = {
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_GL_ACCESS_TOKEN as string;
 
 function Map(results: any) {
+  // Create a map instance
   const mapContainer = useRef<any>(null);
   const map = useRef<mapboxgl.Map | any>(null);
 
+  // Set coordinates for the center of the map
   const lat = results.results[0].center[1];
   const lng = results.results[0].center[0];
 
-  // const geojson = {
-  //   type: 'Feature',
-  //   features: [
-  //     {
-  //       geometry: {
-  //         type: 'Point',
-  //         coordinates: {
-  //           lat,
-  //           lng,
-  //         },
-  //       },
-  //     },
-  //   ],
-  // };
-
+  /**
+   * Use Mapbox GL JS's `flyTo` to move the camera smoothly
+   * a given center point
+   * */
   function flyToStore(currentFeature: any) {
     map.current.flyTo({
       center: currentFeature.geometry.coordinates,
@@ -69,7 +64,32 @@ function Map(results: any) {
     });
   }
 
+  // Add a listing for each marker
+  const buildLocationList = (data: any) => {
+    const listings = document.getElementById('listings');
+    listings!.innerHTML = '';
+
+    data.features.map((item: any) => {
+      const prop = item.geometry.properties;
+      const listing = listings!.appendChild(document.createElement('div'));
+      listing.className = 'item';
+      listing.id = `listing-${prop.id}`;
+      const link = listing.appendChild(document.createElement('a'));
+      link.href = '#';
+      link.id = `link-${prop.id}`;
+      link.innerHTML = prop.name;
+
+      // Add an event listener for the links in the listing
+      link.addEventListener('click', () => {
+        const clickedListing = data.features[prop.id];
+        flyToStore(clickedListing);
+      });
+      return listing;
+    });
+  };
+
   useEffect(() => {
+    // Initialize map when component mounts
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
       style: 'mapbox://styles/mapbox/streets-v12',
@@ -77,14 +97,15 @@ function Map(results: any) {
       zoom: 10,
     });
 
+    // Add markers to the map
     geojson.features.forEach((marker) => {
-      // create a DOM element for the marker
+      // Create a DOM element for the marker
       const markerIcon = document.createElement('div');
       const root = createRoot(markerIcon);
       root.render(<Marker />);
 
+      // Add an event listener to the marker
       markerIcon.addEventListener('click', () => {
-        /* Fly to the point */
         flyToStore(marker);
       });
 
@@ -93,11 +114,18 @@ function Map(results: any) {
         .addTo(map.current);
     });
 
-    // Add zoom and rotation controls to the map.
+    buildLocationList(geojson);
+
+    // Add zoom and rotation controls to the map
     map.current.addControl(new mapboxgl.NavigationControl());
   }, [lat, lng]);
 
-  return <div className="relative h-[50vh]" ref={mapContainer} />;
+  return (
+    <>
+      <div className="relative h-[50vh]" ref={mapContainer} />
+      <div id="listings" />
+    </>
+  );
 }
 
 export default Map;
