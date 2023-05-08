@@ -74,9 +74,10 @@ function Map(results: any) {
       const listing = listings!.appendChild(document.createElement('div'));
       listing.className = 'item';
       listing.id = `listing-${prop.id}`;
+
       const link = listing.appendChild(document.createElement('a'));
       link.href = '#';
-      link.id = `link-${prop.id}`;
+      link.setAttribute('data-id', `${prop.id}`);
       link.innerHTML = prop.name;
 
       // Add an event listener for the links in the listing
@@ -84,6 +85,36 @@ function Map(results: any) {
         const clickedListing = data.features[prop.id];
         flyToStore(clickedListing);
       });
+
+      const mapMarkers = document.querySelectorAll('.mapboxgl-marker');
+
+      // Add mouseenter and mouseleave events for the listing links
+      link.addEventListener('mouseenter', (event) => {
+        const target = event.target as HTMLAnchorElement;
+        const listingId = target.getAttribute('data-id');
+
+        const markersList = Array.from(mapMarkers).filter(
+          (marker) => marker.getAttribute('data-id') === listingId
+        );
+
+        markersList.map((marker) => {
+          return marker.children[0]!.classList.add('animate-bounce');
+        });
+      });
+
+      link.addEventListener('mouseleave', (event) => {
+        const target = event.target as HTMLAnchorElement;
+        const listingId = target.getAttribute('data-id');
+
+        const markersList = Array.from(mapMarkers).filter(
+          (marker) => marker.getAttribute('data-id') === listingId
+        );
+
+        markersList.map((marker) => {
+          return marker.children[0]!.classList.remove('animate-bounce');
+        });
+      });
+
       return listing;
     });
   };
@@ -101,6 +132,7 @@ function Map(results: any) {
     geojson.features.forEach((marker) => {
       // Create a DOM element for the marker
       const markerIcon = document.createElement('div');
+      markerIcon.setAttribute('data-id', `${marker.geometry.properties.id}`);
       const root = createRoot(markerIcon);
       root.render(<Marker />);
 
