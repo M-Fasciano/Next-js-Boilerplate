@@ -1,4 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
+import axios from 'axios';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 
@@ -6,15 +7,37 @@ import Button from '@/components/atoms/Button';
 
 function SearchBox({ setResults }: any) {
   const router = useRouter();
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState<string>('');
   const accessToken = process.env.NEXT_PUBLIC_MAPBOX_GL_ACCESS_TOKEN;
+  const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
   const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${query}.json?access_token=${accessToken}`;
+  const [coordinates, setCoordinates] = useState({
+    latitude: 0,
+    longitude: 0,
+  });
 
   async function handleSearch() {
     const response = await fetch(url);
     const data = await response.json();
     setResults(data.features);
   }
+
+  const convertToCoordinates = () => {
+    const apiUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
+      query
+    )}&key=${apiKey}`;
+
+    axios
+      .get(apiUrl)
+      .then((response) => {
+        const result = response.data.results[0];
+        const { lat, lng } = result.geometry.location;
+        setCoordinates({ latitude: lat, longitude: lng });
+      })
+      .catch((error) => {
+        console.error('Error converting location to coordinates:', error);
+      });
+  };
 
   return (
     <>
@@ -42,11 +65,24 @@ function SearchBox({ setResults }: any) {
         />
 
         <div className="absolute bottom-2.5 right-2.5">
-          <Button onClick={handleSearch} color="success" size="sm" submit>
+          <Button
+            onClick={() => {
+              handleSearch();
+              convertToCoordinates();
+            }}
+            color="success"
+            size="sm"
+            submit
+          >
             Search
           </Button>
         </div>
       </div>
+      {coordinates && (
+        <div>
+          Latitude: {coordinates.latitude}, Longitude: {coordinates.longitude}
+        </div>
+      )}
     </>
   );
 }
