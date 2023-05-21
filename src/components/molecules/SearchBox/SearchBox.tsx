@@ -5,16 +5,12 @@ import React, { useState } from 'react';
 
 import Button from '@/components/atoms/Button';
 
-function SearchBox({ setResults }: any) {
+function SearchBox({ setResults, coordinates, setCoordinates }: any) {
   const router = useRouter();
   const [query, setQuery] = useState<string>('');
   const accessToken = process.env.NEXT_PUBLIC_MAPBOX_GL_ACCESS_TOKEN;
   const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
   const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${query}.json?access_token=${accessToken}`;
-  const [coordinates, setCoordinates] = useState({
-    latitude: 0,
-    longitude: 0,
-  });
 
   async function handleSearch() {
     const response = await fetch(url);
