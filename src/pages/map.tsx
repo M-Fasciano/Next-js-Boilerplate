@@ -20,9 +20,7 @@ const Map = () => {
         setCoordinates={setCoordinates}
       />
       <br />
-      {results.length > 0 ? (
-        <MapBox results={results} coordinates={coordinates} />
-      ) : null}
+      {results.length > 0 ? <MapBox results={results} /> : null}
     </Main>
   );
 };
