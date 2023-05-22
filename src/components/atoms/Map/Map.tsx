@@ -46,7 +46,7 @@ const geojson = {
 
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_GL_ACCESS_TOKEN as string;
 
-function Map({ results, coordinates }: any) {
+function Map({ results }: any) {
   // Create a map instance
   const mapContainer = useRef<any>(null);
   const map = useRef<mapboxgl.Map | any>(null);
@@ -83,8 +83,9 @@ function Map({ results, coordinates }: any) {
       link.innerHTML = prop.name;
 
       if (prop.distance) {
+        const proximity = listing.appendChild(document.createElement('span'));
         const roundedDistance = Math.round(prop.distance * 100) / 100;
-        listing.innerHTML += ` <span>${roundedDistance} miles away</span>`;
+        proximity.innerHTML = ` <span>${roundedDistance} miles away</span>`;
       }
 
       // Add an event listener for the links in the listing
@@ -126,36 +127,6 @@ function Map({ results, coordinates }: any) {
     });
   };
 
-  /**
-   * Calculate distances:
-   * For each store, use turf.disance to calculate the distance
-   * in miles between the searchResult and the store. Assign the
-   * calculated value to a property called `distance`.
-   */
-  const options = { units: 'miles' } as any;
-  for (const store of geojson.features) {
-    const from = point([coordinates.latitude, coordinates.longitude]);
-    const to = point([
-      store.geometry.coordinates.lat,
-      store.geometry.coordinates.lng,
-    ]);
-    store.properties.distance = distance(from, to, options);
-  }
-
-  /**
-   * Sort stores by distance from closest to the `searchResult`
-   * to furthest.
-   */
-  geojson.features.sort((a, b) => {
-    if (a.geometry.coordinates > b.geometry.coordinates) {
-      return 1;
-    }
-    if (a.geometry.coordinates < b.geometry.coordinates) {
-      return -1;
-    }
-    return 0; // a must be equal to b
-  });
-
   useEffect(() => {
     // Initialize map when component mounts
     map.current = new mapboxgl.Map({
@@ -183,12 +154,42 @@ function Map({ results, coordinates }: any) {
         .addTo(map.current);
     });
 
-    // buildLocationList(geojson);
+    /**
+     * Calculate distances:
+     * For each marker, use turf.disance to calculate the distance
+     * in miles between the searchResult and the marker. Assign the
+     * calculated value to a property called `distance`.
+     */
+    const options = { units: 'miles' } as any;
+    for (const marker of geojson.features) {
+      const from = point([lat, lng]);
+      const to = point([
+        marker.geometry.coordinates.lat,
+        marker.geometry.coordinates.lng,
+      ]);
+      marker.properties.distance = distance(from, to, options);
+    }
+
+    /**
+     * Sort markers by distance from closest to the `searchResult`
+     * to furthest.
+     */
+    geojson.features.sort((a, b) => {
+      const distanceA = a.properties.distance;
+      const distanceB = b.properties.distance;
+      if (distanceA > distanceB) {
+        return 1;
+      }
+      if (distanceA < distanceB) {
+        return -1;
+      }
+      return 0; // a must be equal to b
+    });
 
     /**
      * Rebuild the listings:
      * Remove the existing listings and build the location
-     * list again using the newly sorted stores.
+     * list again using the newly sorted markers.
      */
     const listings = document.getElementById('listings');
     while (listings?.firstChild) {
