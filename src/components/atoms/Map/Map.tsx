@@ -7,6 +7,8 @@ import React, { useEffect, useRef } from 'react';
 import { createRoot } from 'react-dom/client';
 
 import Marker from '../Marker';
+import { buildLocationList } from './helpers/buildLocationList';
+import { flyToPlace } from './helpers/flyToPlace';
 
 export const markers = [
   {
@@ -55,78 +57,6 @@ function Map({ results }: any) {
   const lat = results[0].center[1];
   const lng = results[0].center[0];
 
-  /**
-   * Use Mapbox GL JS's `flyTo` to move the camera smoothly
-   * a given center point
-   * */
-  function flyToStore(currentFeature: any) {
-    map.current.flyTo({
-      center: currentFeature.geometry.coordinates,
-      zoom: 15,
-    });
-  }
-
-  // Add a listing for each marker
-  const buildLocationList = (data: any) => {
-    const listings = document.getElementById('listings');
-    listings!.innerHTML = '';
-
-    data.features.map((item: any) => {
-      const prop = item.properties;
-      const listing = listings!.appendChild(document.createElement('div'));
-      listing.className = 'item';
-      listing.id = `listing-${prop.id}`;
-
-      const link = listing.appendChild(document.createElement('a'));
-      link.href = '#';
-      link.setAttribute('data-id', `${prop.id}`);
-      link.innerHTML = prop.name;
-
-      if (prop.distance) {
-        const proximity = listing.appendChild(document.createElement('span'));
-        const roundedDistance = Math.round(prop.distance * 100) / 100;
-        proximity.innerHTML = ` <span>${roundedDistance} miles away</span>`;
-      }
-
-      // Add an event listener for the links in the listing
-      link.addEventListener('click', () => {
-        const clickedListing = data.features[prop.id];
-        flyToStore(clickedListing);
-      });
-
-      const mapMarkers = document.querySelectorAll('.mapboxgl-marker');
-
-      // Add mouseenter and mouseleave events for the listing links
-      link.addEventListener('mouseenter', (event) => {
-        const target = event.target as HTMLAnchorElement;
-        const listingId = target.getAttribute('data-id');
-
-        const markersList = Array.from(mapMarkers).filter(
-          (marker) => marker.getAttribute('data-id') === listingId
-        );
-
-        markersList.map((marker) => {
-          return marker.children[0]!.classList.add('animate-bounce');
-        });
-      });
-
-      link.addEventListener('mouseleave', (event) => {
-        const target = event.target as HTMLAnchorElement;
-        const listingId = target.getAttribute('data-id');
-
-        const markersList = Array.from(mapMarkers).filter(
-          (marker) => marker.getAttribute('data-id') === listingId
-        );
-
-        markersList.map((marker) => {
-          return marker.children[0]!.classList.remove('animate-bounce');
-        });
-      });
-
-      return listing;
-    });
-  };
-
   useEffect(() => {
     // Initialize map when component mounts
     map.current = new mapboxgl.Map({
@@ -146,7 +76,7 @@ function Map({ results }: any) {
 
       // Add an event listener to the marker
       markerIcon.addEventListener('click', () => {
-        flyToStore(marker);
+        flyToPlace(marker, map);
       });
 
       new mapboxgl.Marker(markerIcon)
@@ -195,7 +125,7 @@ function Map({ results }: any) {
     while (listings?.firstChild) {
       listings.removeChild(listings.firstChild);
     }
-    buildLocationList(geojson);
+    buildLocationList(geojson, map.current);
 
     // Add zoom and rotation controls to the map
     map.current.addControl(new mapboxgl.NavigationControl());
