@@ -5,21 +5,17 @@ import React, { useState } from 'react';
 
 import Button from '@/components/atoms/Button';
 
-function SearchBox({ setResults }: any) {
+import { fetchNearbyPlaces } from './helpers/fetchNearbyPlaces';
+
+function SearchBox({ setResults, coordinates, setCoordinates }: any) {
   const router = useRouter();
   const [query, setQuery] = useState<string>('');
-  const accessToken = process.env.NEXT_PUBLIC_MAPBOX_GL_ACCESS_TOKEN;
   const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
-  const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${query}.json?access_token=${accessToken}`;
-  const [coordinates, setCoordinates] = useState({
-    latitude: 0,
-    longitude: 0,
-  });
 
   async function handleSearch() {
-    const response = await fetch(url);
-    const data = await response.json();
-    setResults(data.features);
+    const results = await fetchNearbyPlaces(query);
+
+    setResults(results);
   }
 
   const convertToCoordinates = () => {
@@ -67,8 +63,8 @@ function SearchBox({ setResults }: any) {
         <div className="absolute bottom-2.5 right-2.5">
           <Button
             onClick={() => {
-              handleSearch();
               convertToCoordinates();
+              handleSearch();
             }}
             color="success"
             size="sm"
