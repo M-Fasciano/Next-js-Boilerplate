@@ -12,6 +12,8 @@ const Map = () => {
     longitude: 0,
   });
 
+  // console.log('results', results);
+
   return (
     <Main meta={<Meta title="Lorem ipsum" description="Lorem ipsum" />}>
       <SearchBox
