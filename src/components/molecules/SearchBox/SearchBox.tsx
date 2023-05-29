@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 
 import Button from '@/components/atoms/Button';
 
-import { fetchNearbyPlaces } from './helpers/fetchNearbyPlaces';
+import { findNearbyPlaces } from './helpers/fetchNearbyPlaces';
 
 function SearchBox({ setResults, coordinates, setCoordinates }: any) {
   const router = useRouter();
@@ -13,18 +13,18 @@ function SearchBox({ setResults, coordinates, setCoordinates }: any) {
   const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
 
   async function handleSearch() {
-    const results = await fetchNearbyPlaces(query);
+    const results = await findNearbyPlaces(query);
 
     setResults(results);
   }
 
   const convertToCoordinates = () => {
-    const apiUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
+    const endpoint = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
       query
     )}&key=${apiKey}`;
 
     axios
-      .get(apiUrl)
+      .get(endpoint)
       .then((response) => {
         const result = response.data.results[0];
         const { lat, lng } = result.geometry.location;
