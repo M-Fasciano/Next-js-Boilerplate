@@ -1,24 +1,16 @@
-// import { getBoundingBox } from './getBoundingBox';
+import axios from 'axios';
 
-// Function to fetch nearby places using Mapbox Places API
-export async function fetchNearbyPlaces(query: string) {
+export async function findNearbyPlaces(query: string) {
   // const radius = 5000; // Radius in meters (adjust as needed)
-  const apiKey = process.env.NEXT_PUBLIC_MAPBOX_GL_ACCESS_TOKEN; // Replace with your Mapbox Places API key
-
-  // console.log('query', query);
-  // console.log('location', location);
-
   // const bbox = getBoundingBox(location, radius);
-
-  // const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${query}.json?access_token=${apiKey}&types=place&bbox=${bbox}`;
-
-  const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${query}.json?access_token=${apiKey}`;
-
-  const response = await fetch(url);
-  if (!response.ok) {
-    throw new Error(response.statusText);
+  // const endpoint = `https://api.mapbox.com/geocoding/v5/mapbox.places/${query}.json?access_token=${apiKey}&types=place&bbox=${bbox}`;
+  const accessToken = process.env.NEXT_PUBLIC_MAPBOX_GL_ACCESS_TOKEN;
+  const endpoint = `https://api.mapbox.com/geocoding/v5/mapbox.places/${query}.json?access_token=${accessToken}`;
+  try {
+    const response = await axios.get(endpoint);
+    return response.data.features;
+  } catch (error) {
+    console.error('Error occurred while fetching nearby places:', error);
+    return [];
   }
-  const data = await response.json();
-
-  return data.features;
 }

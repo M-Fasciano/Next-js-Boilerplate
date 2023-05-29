@@ -52,6 +52,7 @@ function Map({ results }: any) {
   // Create a map instance
   const mapContainer = useRef<any>(null);
   const map = useRef<mapboxgl.Map | any>(null);
+  const radius = 5; // Radius in miles (adjust as needed)
 
   // Set coordinates for the center of the map
   const lat = results[0].center[1];
@@ -66,23 +67,42 @@ function Map({ results }: any) {
       zoom: 10,
     });
 
-    // Add markers to the map
-    geojson.features.forEach((marker) => {
-      // Create a DOM element for the marker
-      const markerIcon = document.createElement('div');
-      markerIcon.setAttribute('data-id', `${marker.properties.id}`);
-      const root = createRoot(markerIcon);
-      root.render(<Marker />);
-
-      // Add an event listener to the marker
-      markerIcon.addEventListener('click', () => {
-        flyToPlace(marker, map);
+    // Function to filter features within the specified radius
+    function filterFeatures(features: any[]) {
+      return features.filter((feature) => {
+        const options = { units: 'miles' } as any;
+        const from = point([lat, lng]);
+        const to = point([
+          feature.geometry.coordinates.lat,
+          feature.geometry.coordinates.lng,
+        ]);
+        const calcDistance = distance(from, to, options);
+        return calcDistance <= radius;
       });
+    }
 
-      new mapboxgl.Marker(markerIcon)
-        .setLngLat(marker.geometry.coordinates)
-        .addTo(map.current);
-    });
+    // Add markers to the map
+    function addMarkers(features: any[]) {
+      features.forEach((marker) => {
+        // Create a DOM element for the marker
+        const markerIcon = document.createElement('div');
+        markerIcon.setAttribute('data-id', `${marker.properties.id}`);
+        const root = createRoot(markerIcon);
+        root.render(<Marker />);
+
+        // Add an event listener to the marker
+        markerIcon.addEventListener('click', () => {
+          flyToPlace(marker, map);
+        });
+
+        new mapboxgl.Marker(markerIcon)
+          .setLngLat(marker.geometry.coordinates)
+          .addTo(map.current);
+      });
+    }
+
+    const filteredFeatures = filterFeatures(geojson.features);
+    addMarkers(filteredFeatures);
 
     /**
      * Calculate distances:
