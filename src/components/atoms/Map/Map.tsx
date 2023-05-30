@@ -59,6 +59,8 @@ function Map({ results }: any) {
   const lng = results[0].center[0];
 
   useEffect(() => {
+    const options = { units: 'miles' } as any;
+
     // Initialize map when component mounts
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
@@ -70,14 +72,13 @@ function Map({ results }: any) {
     // Function to filter features within the specified radius
     function filterFeatures(features: any[]) {
       return features.filter((feature) => {
-        const options = { units: 'miles' } as any;
         const from = point([lat, lng]);
         const to = point([
           feature.geometry.coordinates.lat,
           feature.geometry.coordinates.lng,
         ]);
-        const calcDistance = distance(from, to, options);
-        return calcDistance <= radius;
+        const dist = distance(from, to, options);
+        return dist <= radius;
       });
     }
 
@@ -104,13 +105,17 @@ function Map({ results }: any) {
     const filteredFeatures = filterFeatures(geojson.features);
     addMarkers(filteredFeatures);
 
+    const geojsonFilteredFeatures = {
+      type: 'Feature',
+      features: filteredFeatures,
+    };
+
     /**
      * Calculate distances:
      * For each marker, use turf.disance to calculate the distance
      * in miles between the searchResult and the marker. Assign the
      * calculated value to a property called `distance`.
      */
-    const options = { units: 'miles' } as any;
     for (const marker of geojson.features) {
       const from = point([lat, lng]);
       const to = point([
@@ -145,7 +150,7 @@ function Map({ results }: any) {
     while (listings?.firstChild) {
       listings.removeChild(listings.firstChild);
     }
-    buildLocationList(geojson, map.current);
+    buildLocationList(geojsonFilteredFeatures, map);
 
     // Add zoom and rotation controls to the map
     map.current.addControl(new mapboxgl.NavigationControl());
