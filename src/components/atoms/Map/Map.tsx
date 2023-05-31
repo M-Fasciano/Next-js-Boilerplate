@@ -48,11 +48,10 @@ const geojson = {
 
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_GL_ACCESS_TOKEN as string;
 
-function Map({ results }: any) {
+function Map({ results, radius = 5 }: any) {
   // Create a map instance
   const mapContainer = useRef<any>(null);
   const map = useRef<mapboxgl.Map | any>(null);
-  const radius = 5; // Radius in miles (adjust as needed)
 
   // Set coordinates for the center of the map
   const lat = results[0].center[1];
@@ -78,7 +77,7 @@ function Map({ results }: any) {
           feature.geometry.coordinates.lng,
         ]);
         const dist = distance(from, to, options);
-        return dist <= radius;
+        return dist <= parseInt(radius, 10);
       });
     }
 
@@ -102,6 +101,7 @@ function Map({ results }: any) {
       });
     }
 
+    // Filter the places that are within the radius
     const filteredFeatures = filterFeatures(geojson.features);
     addMarkers(filteredFeatures);
 
@@ -154,7 +154,7 @@ function Map({ results }: any) {
 
     // Add zoom and rotation controls to the map
     map.current.addControl(new mapboxgl.NavigationControl());
-  }, [lat, lng]);
+  }, [lat, lng, radius]);
 
   return (
     <>
