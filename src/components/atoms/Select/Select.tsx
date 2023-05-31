@@ -1,7 +1,8 @@
-import router from 'next/router';
+import { useRouter } from 'next/router';
 import React from 'react';
 
 function Select({ setRadius }: { setRadius: any }) {
+  const router = useRouter();
   const handleChange = (e: any) => {
     setRadius(e.target.value);
   };
