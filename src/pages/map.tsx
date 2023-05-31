@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import MapBox from '@/components/atoms/Map';
+import Select from '@/components/atoms/Select';
 import SearchBox from '@/components/molecules/SearchBox';
 import { Meta } from '@/layouts/Meta';
 import { Main } from '@/templates/Main';
@@ -11,18 +12,20 @@ const Map = () => {
     latitude: 0,
     longitude: 0,
   });
-
-  // console.log('results', results);
+  const [radius, setRadius] = useState<number>(5);
 
   return (
     <Main meta={<Meta title="Lorem ipsum" description="Lorem ipsum" />}>
-      <SearchBox
-        setResults={setResults}
-        coordinates={coordinates}
-        setCoordinates={setCoordinates}
-      />
+      <div className="flex items-center justify-between">
+        <SearchBox
+          setResults={setResults}
+          coordinates={coordinates}
+          setCoordinates={setCoordinates}
+        />
+        <Select setRadius={setRadius} />
+      </div>
       <br />
-      {results.length > 0 ? <MapBox results={results} /> : null}
+      {results.length > 0 ? <MapBox results={results} radius={radius} /> : null}
     </Main>
   );
 };
