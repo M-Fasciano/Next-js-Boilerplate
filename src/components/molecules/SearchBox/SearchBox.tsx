@@ -7,7 +7,7 @@ import Button from '@/components/atoms/Button';
 
 import { findNearbyPlaces } from './helpers/fetchNearbyPlaces';
 
-function SearchBox({ setResults, coordinates, setCoordinates }: any) {
+function SearchBox({ setResults, setCoordinates }: any) {
   const router = useRouter();
   const [query, setQuery] = useState<string>('');
   const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
@@ -43,7 +43,7 @@ function SearchBox({ setResults, coordinates, setCoordinates }: any) {
       >
         Search
       </label>
-      <div className="relative">
+      <div className="relative mr-4 flex-1">
         <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
           <img
             src={`${router.basePath}/assets/images/map-marker-alt.svg`}
@@ -74,11 +74,6 @@ function SearchBox({ setResults, coordinates, setCoordinates }: any) {
           </Button>
         </div>
       </div>
-      {coordinates && (
-        <div>
-          Latitude: {coordinates.latitude}, Longitude: {coordinates.longitude}
-        </div>
-      )}
     </>
   );
 }
