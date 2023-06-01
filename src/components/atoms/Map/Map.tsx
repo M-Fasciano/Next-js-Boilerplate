@@ -26,6 +26,21 @@ export const markers = [
     lng: -0.079471,
     name: 'Jane Doe',
   },
+  {
+    lat: 53.424555,
+    lng: -2.980313,
+    name: 'Bill Potts',
+  },
+  {
+    lat: 53.418008,
+    lng: -2.963135,
+    name: 'Elon Jones',
+  },
+  {
+    lat: 53.416371,
+    lng: -2.940117,
+    name: 'Jeff Lee',
+  },
 ];
 
 const geojson = {
@@ -154,6 +169,16 @@ function Map({ results, radius = 5 }: any) {
 
     // Add zoom and rotation controls to the map
     map.current.addControl(new mapboxgl.NavigationControl());
+
+    //  Add the geolocation control to the map
+    const geolocate = new mapboxgl.GeolocateControl({
+      positionOptions: {
+        enableHighAccuracy: true,
+      },
+      trackUserLocation: true,
+    });
+
+    map.current.addControl(geolocate);
   }, [lat, lng, radius]);
 
   return (
