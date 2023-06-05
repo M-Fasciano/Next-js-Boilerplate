@@ -43,7 +43,7 @@ function SearchBox({ setResults, setCoordinates }: any) {
       >
         Search
       </label>
-      <div className="relative mr-4 flex-1">
+      <div className="relative flex-1">
         <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
           <img
             src={`${router.basePath}/assets/images/map-marker-alt.svg`}
