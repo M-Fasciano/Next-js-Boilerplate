@@ -1,39 +1,15 @@
-/* eslint-disable import/no-extraneous-dependencies */
-import axios from 'axios';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React from 'react';
 
 import Button from '@/components/atoms/Button';
 
-import { findNearbyPlaces } from './helpers/fetchNearbyPlaces';
-
-function SearchBox({ setResults, setCoordinates }: any) {
+function SearchBox({
+  query,
+  setQuery,
+  convertToCoordinates,
+  handleSearch,
+}: any) {
   const router = useRouter();
-  const [query, setQuery] = useState<string>('');
-  const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
-
-  async function handleSearch() {
-    const results = await findNearbyPlaces(query);
-
-    setResults(results);
-  }
-
-  const convertToCoordinates = () => {
-    const endpoint = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
-      query
-    )}&key=${apiKey}`;
-
-    axios
-      .get(endpoint)
-      .then((response) => {
-        const result = response.data.results[0];
-        const { lat, lng } = result.geometry.location;
-        setCoordinates({ latitude: lat, longitude: lng });
-      })
-      .catch((error) => {
-        console.error('Error converting location to coordinates:', error);
-      });
-  };
 
   return (
     <>
