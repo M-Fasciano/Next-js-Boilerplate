@@ -14,7 +14,6 @@ export const convertToCoordinates = ({ query, setCoordinates }: any) => {
       setCoordinates({ latitude: lat, longitude: lng });
     })
     .catch((error) => {
-      const err = `Error converting location to coordinates: ${error}`;
-      return err;
+      console.error('Error converting location to coordinates:', error);
     });
 };

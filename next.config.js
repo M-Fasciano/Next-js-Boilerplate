@@ -27,4 +27,7 @@ module.exports = withBundleAnalyzer({
     NEXT_PUBLIC_MAPBOX_GL_ACCESS_TOKEN:
       process.env.NEXT_PUBLIC_MAPBOX_GL_ACCESS_TOKEN,
   },
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production',
+  },
 });
