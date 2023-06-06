@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import axios from 'axios';
 
 export const convertToCoordinates = ({ query, setCoordinates }: any) => {
@@ -15,6 +14,7 @@ export const convertToCoordinates = ({ query, setCoordinates }: any) => {
       setCoordinates({ latitude: lat, longitude: lng });
     })
     .catch((error) => {
-      console.error('Error converting location to coordinates:', error);
+      const err = `Error converting location to coordinates: ${error}`;
+      return err;
     });
 };
