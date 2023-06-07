@@ -6,8 +6,8 @@ import SearchBox from '@/components/molecules/SearchBox';
 import { Meta } from '@/layouts/Meta';
 import { Main } from '@/templates/Main';
 
-import { convertToCoordinates } from './helpers/convertToCoordinates';
-import { findNearbyPlaces } from './helpers/fetchNearbyPlaces';
+import { convertToCoordinates } from '../helpers/convertToCoordinates';
+import { findNearbyPlaces } from '../helpers/fetchNearbyPlaces';
 
 const Map = () => {
   const [results, setResults] = useState([]);
