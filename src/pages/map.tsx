@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import MapBox from '@/components/atoms/Map';
 import Location from '@/components/molecules/Location';
@@ -6,13 +6,30 @@ import SearchBox from '@/components/molecules/SearchBox';
 import { Meta } from '@/layouts/Meta';
 import { Main } from '@/templates/Main';
 
+import { convertToCoordinates } from '../helpers/convertToCoordinates';
+import { findNearbyPlaces } from '../helpers/fetchNearbyPlaces';
+
 const Map = () => {
   const [results, setResults] = useState([]);
-  const [coordinates, setCoordinates] = useState({
+  const [radius, setRadius] = useState<number>(5);
+  const [query, setQuery] = useState<string>('');
+  const [, setCoordinates] = useState({
     latitude: 0,
     longitude: 0,
   });
-  const [radius, setRadius] = useState<number>(5);
+
+  async function handleSearch() {
+    const res = await findNearbyPlaces(query);
+
+    setResults(res);
+  }
+
+  useEffect(() => {
+    if (query) {
+      handleSearch();
+      convertToCoordinates({ query, setCoordinates });
+    }
+  }, [query]);
 
   return (
     <Main meta={<Meta title="Lorem ipsum" description="Lorem ipsum" />}>
@@ -22,8 +39,9 @@ const Map = () => {
         ) : (
           <SearchBox
             setResults={setResults}
-            coordinates={coordinates}
-            setCoordinates={setCoordinates}
+            setQuery={setQuery}
+            handleSearch={handleSearch}
+            convertToCoordinates={convertToCoordinates}
           />
         )}
       </div>
