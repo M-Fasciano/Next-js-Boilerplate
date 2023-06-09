@@ -27,7 +27,14 @@ function Location(props: LocationProps) {
         />
         <div className="mx-2 h-[30px] w-px bg-gray-400" />
         <span>whitin</span>
-        <Select setRadius={setRadius} />
+        <Select setRadius={setRadius}>
+          <option value="5" defaultValue="5">
+            5 Miles
+          </option>
+          <option value="10">10 Miles</option>
+          <option value="15">15 Miles</option>
+          <option value="20">20 Miles</option>
+        </Select>
       </div>
     </Box>
   );
