@@ -1,7 +1,15 @@
 import { useRouter } from 'next/router';
 
+import FooterLinks from '@/components/atoms/FooterLinks';
 import { Meta } from '@/layouts/Meta';
 import { Main } from '@/templates/Main';
+
+const footerLinks = [
+  { title: 'Cookies', url: '/cookies' },
+  { title: 'Terms of use', url: '/terms-of-use' },
+  { title: 'Privacy policy', url: '/privacy-policy' },
+  { title: 'Site map', url: '/site-map' },
+];
 
 const Index = () => {
   const router = useRouter();
@@ -179,6 +187,7 @@ const Index = () => {
         </a>{' '}
         on our website to support this project.
       </p>
+      <FooterLinks links={footerLinks} />
     </Main>
   );
 };
