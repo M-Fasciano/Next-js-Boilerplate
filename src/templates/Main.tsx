@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
 
+import Footer from '@/layouts/Footer';
 import { AppConfig } from '@/utils/AppConfig';
 
 type IMainProps = {
@@ -9,7 +10,7 @@ type IMainProps = {
 };
 
 const Main = (props: IMainProps) => (
-  <div className="w-full px-1 text-gray-700 antialiased">
+  <div className="w-full text-gray-700 antialiased">
     {props.meta}
 
     <div className="mx-auto max-w-screen-md">
@@ -79,6 +80,7 @@ const Main = (props: IMainProps) => (
          */}
       </footer>
     </div>
+    <Footer />
   </div>
 );
 
