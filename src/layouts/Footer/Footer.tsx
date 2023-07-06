@@ -27,7 +27,7 @@ function Footer() {
     <footer className="bg-blue">
       <div className="container mx-auto px-4 py-10">
         <div className="flex flex-col items-center gap-6">
-          <Logo />
+          <Logo variant="light" />
           <p className="font-bold text-white">
             Empowering Fitness Connections, Locally
           </p>
