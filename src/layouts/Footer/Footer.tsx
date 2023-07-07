@@ -32,6 +32,9 @@ function Footer() {
             Empowering Fitness Connections, Locally
           </p>
           <FooterLinks links={footerLinks} />
+          <p className="text-xs text-white text-opacity-50">
+            © Copyright {new Date().getFullYear()} - All rights reserved
+          </p>
         </div>
       </div>
     </footer>
