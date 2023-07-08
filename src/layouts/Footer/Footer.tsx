@@ -24,7 +24,7 @@ const footerLinks = [
 
 function Footer() {
   return (
-    <footer className="bg-blue">
+    <footer className="bg-secondary-light-0">
       <div className="container mx-auto px-4 py-10">
         <div className="flex flex-col items-center gap-6">
           <Logo variant="light" />
