@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Logo from '@/components/atoms/Logo';
 import Navigation from '@/components/atoms/Navigation';
 
 const NavLinks = [
@@ -22,7 +23,12 @@ const NavLinks = [
 ];
 
 function Header() {
-  return <Navigation links={NavLinks} variant="light" />;
+  return (
+    <>
+      <Logo variant="light" />
+      <Navigation links={NavLinks} variant="light" />
+    </>
+  );
 }
 
 export default Header;
