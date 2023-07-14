@@ -10,7 +10,12 @@ interface HeroProps {
 function Hero(props: HeroProps) {
   const { alt, path, className } = props;
 
-  return <Image src={path} alt={alt} className={className} fill />;
+  const isLocal =
+    process.env.NODE_ENV === 'test' && !path.startsWith('/')
+      ? `/${path}`
+      : path;
+
+  return <Image src={isLocal} alt={alt} className={className} fill />;
 }
 
 export default Hero;
