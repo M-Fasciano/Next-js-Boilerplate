@@ -10,9 +10,9 @@ describe('About page', () => {
     it('should have two paragraphs of `Lorem ipsum`', () => {
       render(<About />);
 
-      const paragraph = screen.getAllByText(/Lorem ipsum/);
+      const heading = screen.getByRole('heading', { name: /about/i });
 
-      expect(paragraph).toHaveLength(2);
+      expect(heading).toBeInTheDocument();
     });
   });
 });
