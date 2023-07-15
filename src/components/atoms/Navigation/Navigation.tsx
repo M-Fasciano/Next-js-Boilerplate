@@ -1,15 +1,10 @@
-import Link from 'next/link';
 import React from 'react';
 
+import Links from '../Links';
 import { style } from './Navigation.style';
 
-interface NavLink {
-  title: string;
-  href: string;
-}
-
 interface NavLinksProps {
-  links: NavLink[];
+  links: { title: string; href: string }[];
   variant?: 'light' | 'dark';
 }
 
@@ -17,21 +12,13 @@ function Navigation(props: NavLinksProps) {
   const { links, variant } = props;
 
   return (
-    <ul className="flex gap-4">
-      {links.map((link, index) => (
-        <li key={index}>
-          <Link
-            href={`${link.href}`}
-            className={
-              variant === 'light'
-                ? `${style.color.ligth}`
-                : `${style.color.dark}`
-            }
-          >
-            {link.title}
-          </Link>
-        </li>
-      ))}
+    <ul className="flex gap-4 lg:gap-14">
+      <Links
+        links={links}
+        className={
+          variant === 'light' ? `${style.color.ligth}` : `${style.color.dark}`
+        }
+      />
     </ul>
   );
 }
