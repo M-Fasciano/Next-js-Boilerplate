@@ -8,7 +8,7 @@ describe('Navigation', () => {
       cy.findByRole('heading');
 
       // Find a link containing "About" text and click it
-      cy.findByRole('link', { name: 'About' }).click();
+      cy.findByRole('link', { name: 'About' }).first().click();
 
       // The new url should include "/about"
       cy.url().should('include', '/about');
@@ -30,7 +30,7 @@ describe('Navigation', () => {
       cy.visit('/about');
 
       // Wait until the page is displayed
-      cy.findByRole('link', { name: 'About' });
+      cy.findByRole('link', { name: 'About' }).first();
 
       cy.percySnapshot('About');
     });
