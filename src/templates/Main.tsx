@@ -13,8 +13,7 @@ const Main = (props: IMainProps) => (
     {props.meta}
 
     <Header />
-    <div className="mx-auto max-w-screen-md">
-      {/* <header className="border-b border-gray-300">
+    {/* <header className="border-b border-gray-300">
         <div className="pb-8 pt-16">
           <h1 className="text-3xl font-bold text-gray-900">
             {AppConfig.title}
@@ -23,8 +22,7 @@ const Main = (props: IMainProps) => (
         </div>
       </header> */}
 
-      <main className="content py-5 text-xl">{props.children}</main>
-    </div>
+    <main className="relative">{props.children}</main>
     <Footer />
   </div>
 );
