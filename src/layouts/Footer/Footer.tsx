@@ -6,19 +6,19 @@ import Logo from '@/components/atoms/Logo';
 const footerLinks = [
   {
     title: 'About',
-    href: '/about',
+    href: 'about',
   },
   {
     title: 'Contact',
-    href: '/contact',
+    href: 'contact',
   },
   {
     title: 'Terms of Use',
-    href: '/terms-of-use',
+    href: 'terms-of-use',
   },
   {
     title: 'Privacy Policy',
-    href: '/privacy-policy',
+    href: 'privacy-policy',
   },
 ];
 
