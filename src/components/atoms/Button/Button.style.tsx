@@ -16,9 +16,9 @@ export const style = {
       disabled: `text-white border-blue-700 bg-blue-700`,
     },
     success: {
-      bg: `text-white border-green-700 bg-green-700`,
-      outline: `border-green-700 border-2 text-green-700 hover:bg-green-700 hover:text-white`,
-      disabled: `text-white border-green-700 bg-green-700`,
+      bg: `text-white border-primary-dark-0 bg-primary-dark-0`,
+      outline: `border-primary-dark-0 border-2 text-primary-dark-0 hover:bg-primary-dark-0 hover:text-white`,
+      disabled: `text-white border-primary-dark-0 bg-primary-dark-0`,
     },
     danger: {
       bg: `text-white border-red-600 bg-red-600`,
