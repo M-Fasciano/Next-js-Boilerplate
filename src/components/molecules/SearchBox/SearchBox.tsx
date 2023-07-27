@@ -19,7 +19,7 @@ function SearchBox({
       >
         Search
       </label>
-      <div className="relative flex-1">
+      <div className="relative w-full max-w-xl flex-1">
         <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
           <img
             src={`${router.basePath}/assets/images/map-marker-alt.svg`}
