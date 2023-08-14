@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/M-Fasciano/Next-js-Boilerplate/compare/v1.0.0...v1.1.0) (2023-08-14)
+
+
+### Features
+
+* help and support e2e ([cebb374](https://github.com/M-Fasciano/Next-js-Boilerplate/commit/cebb3743883bbc18173f9acbcfc109058f6fde30))
+
 # 1.0.0 (2023-08-14)
 
 
