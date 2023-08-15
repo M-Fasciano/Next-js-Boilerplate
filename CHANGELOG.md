@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/M-Fasciano/Next-js-Boilerplate/compare/v1.1.0...v1.2.0) (2023-08-15)
+
+
+### Features
+
+* cookies page and footer links update ([e0132e0](https://github.com/M-Fasciano/Next-js-Boilerplate/commit/e0132e0d6dace5dfe9e101c52b820fa682c25ae7))
+
 # [1.1.0](https://github.com/M-Fasciano/Next-js-Boilerplate/compare/v1.0.0...v1.1.0) (2023-08-14)
 
 
