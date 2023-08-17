@@ -3,7 +3,9 @@ import { Main } from '@/templates/Main';
 
 const Cookies = () => {
   return (
-    <Main meta={<Meta title="" description="" />}>
+    <Main
+      meta={<Meta title="Location Fitness - Cookies" description="Cookies" />}
+    >
       <h1 className="text-3xl font-bold">Cookies</h1>
     </Main>
   );
