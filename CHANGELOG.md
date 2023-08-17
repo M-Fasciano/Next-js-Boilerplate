@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/M-Fasciano/Next-js-Boilerplate/compare/v1.2.0...v1.3.0) (2023-08-17)
+
+
+### Features
+
+* cookies e2e ([9af6451](https://github.com/M-Fasciano/Next-js-Boilerplate/commit/9af64512f1c5f2c5d0ad8dcd502686e3ebe899cf))
+
 # [1.2.0](https://github.com/M-Fasciano/Next-js-Boilerplate/compare/v1.1.0...v1.2.0) (2023-08-15)
 
 
