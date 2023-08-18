@@ -71,5 +71,17 @@ describe('Seo metadata', () => {
         .invoke('attr', 'content')
         .should('not.be.empty');
     });
+
+    it('should render SEO metadata on Terms of use page', () => {
+      cy.visit('/terms-of-use');
+
+      // The Terms of use page should have a page title
+      cy.title().should('not.be.empty');
+
+      // The Terms of use page should also contain a meta description for SEO
+      cy.get('head meta[name="description"]')
+        .invoke('attr', 'content')
+        .should('not.be.empty');
+    });
   });
 });
