@@ -36,6 +36,18 @@ describe('Seo metadata', () => {
         .should('not.be.empty');
     });
 
+    it('should render SEO metadata on About page', () => {
+      cy.visit('/about');
+
+      // The About page should have a page title
+      cy.title().should('not.be.empty');
+
+      // The About page should also contain a meta description for SEO
+      cy.get('head meta[name="description"]')
+        .invoke('attr', 'content')
+        .should('not.be.empty');
+    });
+
     it('should render SEO metadata on Help & Support page', () => {
       cy.visit('/help-and-support');
 
@@ -48,13 +60,25 @@ describe('Seo metadata', () => {
         .should('not.be.empty');
     });
 
-    it('should render SEO metadata on About page', () => {
-      cy.visit('/about');
+    it('should render SEO metadata on Cookies page', () => {
+      cy.visit('/cookies');
 
-      // The About page should have a page title
+      // The Cookies page should have a page title
       cy.title().should('not.be.empty');
 
-      // The About page should also contain a meta description for SEO
+      // The Cookies page should also contain a meta description for SEO
+      cy.get('head meta[name="description"]')
+        .invoke('attr', 'content')
+        .should('not.be.empty');
+    });
+
+    it('should render SEO metadata on Terms of use page', () => {
+      cy.visit('/terms-of-use');
+
+      // The Terms of use page should have a page title
+      cy.title().should('not.be.empty');
+
+      // The Terms of use page should also contain a meta description for SEO
       cy.get('head meta[name="description"]')
         .invoke('attr', 'content')
         .should('not.be.empty');
