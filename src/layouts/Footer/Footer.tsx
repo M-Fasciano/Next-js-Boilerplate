@@ -5,12 +5,8 @@ import Logo from '@/components/atoms/Logo';
 
 const footerLinks = [
   {
-    title: 'About',
-    href: 'about',
-  },
-  {
-    title: 'Contact',
-    href: 'contact',
+    title: 'Cookies',
+    href: 'cookies',
   },
   {
     title: 'Terms of Use',
@@ -19,6 +15,10 @@ const footerLinks = [
   {
     title: 'Privacy Policy',
     href: 'privacy-policy',
+  },
+  {
+    title: 'Site map',
+    href: 'site-map',
   },
 ];
 
