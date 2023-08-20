@@ -95,5 +95,17 @@ describe('Seo metadata', () => {
         .invoke('attr', 'content')
         .should('not.be.empty');
     });
+
+    it('should render SEO metadata on Site map page', () => {
+      cy.visit('/site-map');
+
+      // The Site map page should have a page title
+      cy.title().should('not.be.empty');
+
+      // The Site map page should also contain a meta description for SEO
+      cy.get('head meta[name="description"]')
+        .invoke('attr', 'content')
+        .should('not.be.empty');
+    });
   });
 });
