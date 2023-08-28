@@ -119,5 +119,17 @@ describe('Seo metadata', () => {
         .invoke('attr', 'content')
         .should('not.be.empty');
     });
+
+    it('should render SEO metadata on Sign up page', () => {
+      cy.visit('/signup');
+
+      // The Sign up page should have a page title
+      cy.title().should('not.be.empty');
+
+      // The Sign up page should also contain a meta description for SEO
+      cy.get('head meta[name="description"]')
+        .invoke('attr', 'content')
+        .should('not.be.empty');
+    });
   });
 });
