@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useState } from 'react';
 
+import Burger from '@/components/atoms/Burger';
 import Button from '@/components/atoms/Button';
 import Logo from '@/components/atoms/Logo';
 import Navigation from '@/components/atoms/Navigation';
@@ -29,6 +30,7 @@ const NavLinks = [
 
 function Header() {
   const router = useRouter();
+  const [isOpen, setIsOpen] = useState(false);
   const isHomePage = router.pathname === '/' ? 'light' : 'dark';
 
   return (
@@ -39,6 +41,7 @@ function Header() {
             <Logo variant={isHomePage} />
           </Link>
           <Navigation links={NavLinks} variant={isHomePage} />
+          <Burger isOpen={isOpen} setIsOpen={setIsOpen} />
         </div>
         <div
           className={
