@@ -40,7 +40,7 @@ function Header() {
           <Link href="/">
             <Logo variant={isHomePage} />
           </Link>
-          <Navigation links={NavLinks} variant={isHomePage} />
+          <Navigation links={NavLinks} variant={isHomePage} isOpen={isOpen} />
           <Burger isOpen={isOpen} setIsOpen={setIsOpen} />
         </div>
         <div
