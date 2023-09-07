@@ -32,7 +32,6 @@ function Header() {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const isHomePage = router.pathname === '/' ? 'light' : 'dark';
-
   return (
     <header className="fixed z-10 flex w-full items-center gap-14 p-4 lg:px-10 lg:py-8">
       <div className="flex w-full items-center justify-between">

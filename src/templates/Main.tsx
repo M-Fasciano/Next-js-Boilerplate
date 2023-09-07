@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 
+import Header from '@/components/organisms/Header';
 import Footer from '@/layouts/Footer';
-import Header from '@/layouts/Header';
 
 type IMainProps = {
   meta: ReactNode;
