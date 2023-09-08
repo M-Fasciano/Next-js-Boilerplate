@@ -35,24 +35,26 @@ function Header() {
   return (
     <header className="fixed z-10 flex w-full items-center gap-14 p-4 lg:px-10 lg:py-8">
       <div className="flex w-full items-center justify-between">
-        <div className="flex items-center gap-4 lg:gap-14">
+        <div className="flex w-full items-center justify-between gap-4 lg:gap-14">
           <Link href="/">
             <Logo variant={isHomePage} />
           </Link>
           <Navigation links={NavLinks} variant={isHomePage} isOpen={isOpen} />
           <Burger isOpen={isOpen} setIsOpen={setIsOpen} />
         </div>
-        <div
-          className={
-            isHomePage === 'light'
-              ? `${style.default} ${style.color.ligth}`
-              : `${style.default} ${style.color.dark}`
-          }
-        >
-          <Link href="/login">Log in</Link>
-          <Link href="/signup">
-            <Button color="success">Sign up</Button>
-          </Link>
+        <div className={`${isOpen ? 'flex gap-4 lg:gap-14' : 'hidden'}`}>
+          <div
+            className={
+              isHomePage === 'light'
+                ? `${style.default} ${style.color.ligth}`
+                : `${style.default} ${style.color.dark}`
+            }
+          >
+            <Link href="/login">Log in</Link>
+            <Link href="/signup">
+              <Button color="success">Sign up</Button>
+            </Link>
+          </div>
         </div>
       </div>
     </header>
