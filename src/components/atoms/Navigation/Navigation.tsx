@@ -13,7 +13,7 @@ function Navigation(props: NavLinksProps) {
   const { links, variant, isOpen } = props;
 
   return (
-    <ul className={`${isOpen ? 'flex gap-4 lg:gap-14' : 'hidden'}`}>
+    <ul className={`${isOpen ? 'flex' : 'hidden'} gap-4 md:flex lg:gap-14`}>
       <Links
         links={links}
         className={

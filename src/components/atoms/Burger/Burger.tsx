@@ -11,7 +11,7 @@ function Burger({ isOpen, setIsOpen }: BurgerProps) {
 
   return (
     <button
-      className="group flex h-12 w-12 flex-col items-center justify-center rounded border-2 border-primary-dark-0 bg-primary-light-100"
+      className="group flex h-12 w-12 flex-col items-center justify-center rounded border-2 border-primary-dark-0 bg-primary-light-100 md:hidden"
       onClick={() => setIsOpen(!isOpen)}
     >
       <div
