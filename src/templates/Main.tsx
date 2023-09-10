@@ -12,7 +12,7 @@ const Main = (props: IMainProps) => (
   <div className="w-full text-gray-700 antialiased">
     {props.meta}
     <Header />
-    <main className="relative">{props.children}</main>
+    <main className="relative z-0">{props.children}</main>
     <Footer />
   </div>
 );
