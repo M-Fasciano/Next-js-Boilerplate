@@ -3,11 +3,8 @@ import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 
 import Burger from '@/components/atoms/Burger';
-import Button from '@/components/atoms/Button';
 import Logo from '@/components/atoms/Logo';
-import Navigation from '@/components/atoms/Navigation';
-
-import { style } from './Header.style';
+import Navigation from '@/components/molecules/Navigation';
 
 const NavLinks = [
   {
@@ -36,27 +33,11 @@ function Header() {
     <header className="fixed z-10 flex w-full items-center gap-14 p-4 lg:px-10 lg:py-8">
       <div className="flex w-full items-center justify-between">
         <div className="flex w-full items-center justify-between gap-4 md:justify-start lg:gap-14">
-          <Link href="/">
+          <Link href="/" className="relative z-10">
             <Logo variant={isHomePage} />
           </Link>
           <Navigation links={NavLinks} variant={isHomePage} isOpen={isOpen} />
           <Burger isOpen={isOpen} setIsOpen={setIsOpen} />
-        </div>
-        <div
-          className={`${isOpen ? 'flex' : 'hidden'}  gap-4 md:flex lg:gap-14`}
-        >
-          <div
-            className={
-              isHomePage === 'light'
-                ? `${style.default} ${style.color.ligth}`
-                : `${style.default} ${style.color.dark}`
-            }
-          >
-            <Link href="/login">Log in</Link>
-            <Link href="/signup">
-              <Button color="success">Sign up</Button>
-            </Link>
-          </div>
         </div>
       </div>
     </header>
