@@ -12,6 +12,7 @@ function Logo(props: LogoProps) {
 
   return (
     <img
+      className="max-w-[140px] md:max-w-none"
       width={width}
       src={`${router.basePath}/assets/images/logo-${
         variant === 'light' ? 'light' : 'dark'
