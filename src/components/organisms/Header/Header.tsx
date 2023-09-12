@@ -1,10 +1,12 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Burger from '@/components/atoms/Burger';
 import Logo from '@/components/atoms/Logo';
 import Navigation from '@/components/molecules/Navigation';
+
+import { style } from './Header.style';
 
 const NavLinks = [
   {
@@ -29,16 +31,42 @@ function Header() {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const isHomePage = router.pathname === '/' ? 'light' : 'dark';
+
+  const [scrolling, setScrolling] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 100) {
+        setScrolling(true);
+      } else {
+        setScrolling(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
-    <header className="fixed z-10 flex w-full items-center gap-14 p-4 lg:px-10 lg:py-8">
-      <div className="flex w-full items-center justify-between">
-        <div className="flex w-full items-center justify-between gap-4 md:justify-start lg:gap-14">
-          <Link href="/" className="relative z-10">
-            <Logo variant={isHomePage} />
-          </Link>
-          <Navigation links={NavLinks} variant={isHomePage} isOpen={isOpen} />
-          <Burger isOpen={isOpen} setIsOpen={setIsOpen} />
-        </div>
+    <header
+      className={`${scrolling ? style.header.scrolled : ''} ${
+        style.header.default
+      }`}
+    >
+      <div className={style.header.inner}>
+        <Link href="/" className="relative z-10">
+          <Logo variant={isHomePage} scrolling={scrolling} />
+        </Link>
+        <Navigation
+          links={NavLinks}
+          variant={isHomePage}
+          isOpen={isOpen}
+          scrolling={scrolling}
+        />
+        <Burger isOpen={isOpen} setIsOpen={setIsOpen} />
       </div>
     </header>
   );
