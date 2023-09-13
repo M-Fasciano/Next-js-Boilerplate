@@ -9,34 +9,31 @@ import { style } from './Navigation.style';
 interface NavLinksProps {
   links: { title: string; href: string }[];
   variant?: 'light' | 'dark';
-  isOpen: boolean;
+  isOpen?: boolean;
+  scrolling?: boolean;
 }
 
 function Navigation(props: NavLinksProps) {
-  const { links, variant, isOpen } = props;
+  const { links, variant, isOpen, scrolling } = props;
 
   return (
     <nav
-      className={`${
-        isOpen
-          ? 'absolute left-0 top-0 flex h-screen w-full flex-col justify-around bg-secondary-light-0 text-center'
-          : 'hidden'
-      } w-full items-center md:flex md:justify-between`}
+      className={`${isOpen ? style.nav.open : style.nav.close} ${
+        style.nav.default
+      }`}
     >
-      <ul className={'flex flex-col gap-4 md:flex-row lg:gap-14'}>
+      <ul className={`${style.ul.default}`}>
         <Links
           links={links}
-          className={
-            variant === 'light' ? `${style.color.ligth}` : `${style.color.dark}`
-          }
+          className={`${variant === 'light' ? style.ul.ligth : style.ul.dark} ${
+            scrolling ? style.ul.ligth : ''
+          }`}
         />
       </ul>
       <ul
-        className={
-          variant === 'light'
-            ? `${style.default} ${style.color.ligth}`
-            : `${style.default} ${style.color.dark}`
-        }
+        className={`${variant === 'light' ? style.ul.ligth : style.ul.dark} ${
+          style.ul.default
+        } ${scrolling ? style.ul.ligth : ''}`}
       >
         <li>
           <Link href="/login">Log in</Link>
