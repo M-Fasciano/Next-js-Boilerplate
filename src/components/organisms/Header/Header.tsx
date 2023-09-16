@@ -30,7 +30,7 @@ const NavLinks = [
 function Header() {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
-  const isHomePage = router.pathname === '/' ? 'light' : 'dark';
+  const isLightMode = router.pathname === '/' || isOpen ? 'light' : 'dark';
 
   const [scrolling, setScrolling] = useState(false);
 
@@ -57,12 +57,12 @@ function Header() {
       }`}
     >
       <div className={style.header.inner}>
-        <Link href="/" className="relative z-10">
-          <Logo variant={isHomePage} scrolling={scrolling} />
+        <Link href="/" className={style.header.logoLink}>
+          <Logo variant={isLightMode} scrolling={scrolling} />
         </Link>
         <Navigation
           links={NavLinks}
-          variant={isHomePage}
+          variant={isLightMode}
           isOpen={isOpen}
           scrolling={scrolling}
         />

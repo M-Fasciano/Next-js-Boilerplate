@@ -5,5 +5,6 @@ export const style = {
     scrolled: 'bg-secondary-light-0',
     inner:
       'flex w-full items-center justify-between gap-4 md:justify-start lg:gap-14',
+    logoLink: 'relative z-10',
   },
 };
