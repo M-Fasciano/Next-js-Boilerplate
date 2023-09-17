@@ -1,3 +1,31 @@
+# [1.4.0](https://github.com/M-Fasciano/Next-js-Boilerplate/compare/v1.3.0...v1.4.0) (2023-09-17)
+
+
+### Features
+
+* added max width for mobile ([67b4db4](https://github.com/M-Fasciano/Next-js-Boilerplate/commit/67b4db428b8f79197e26e91ff394f0e09f1f7bcb))
+* added scroll animation to navigation ([7a988db](https://github.com/M-Fasciano/Next-js-Boilerplate/commit/7a988db863f28b8fb3f217041bb34acdbe183269))
+* burger wip ([c44d423](https://github.com/M-Fasciano/Next-js-Boilerplate/commit/c44d4234bb67ca4ccc978ba08d23bdbf33217a14))
+* format change ([ee29e3f](https://github.com/M-Fasciano/Next-js-Boilerplate/commit/ee29e3ff032a2d80fc1247842a61e6589e91812e))
+* hamburger component wip ([f4bc8ae](https://github.com/M-Fasciano/Next-js-Boilerplate/commit/f4bc8ae75e462a1549c1bd6dbcc734606f014c08))
+* header fix for mobile when nav is open ([ef835a5](https://github.com/M-Fasciano/Next-js-Boilerplate/commit/ef835a5f17551264536ae0c857812a5549f04fd6))
+* header refactoring ([89c7614](https://github.com/M-Fasciano/Next-js-Boilerplate/commit/89c7614c3a696111832b31ba53fd1012293c7757))
+* log in page ([20fcd10](https://github.com/M-Fasciano/Next-js-Boilerplate/commit/20fcd10640059eab13ce8d64ffdc5c04eabfee11))
+* login e2e ([93a9570](https://github.com/M-Fasciano/Next-js-Boilerplate/commit/93a957058aba6902ae455b04290a7d9406337b91))
+* logo change color on scroll ([65651d7](https://github.com/M-Fasciano/Next-js-Boilerplate/commit/65651d79ee097cb7b919399737cef0dc72cac236))
+* main test fix ([9da4652](https://github.com/M-Fasciano/Next-js-Boilerplate/commit/9da4652a5e439824df4906120c60241599ab7e7a))
+* navigation refactoring ([83bd4f5](https://github.com/M-Fasciano/Next-js-Boilerplate/commit/83bd4f5c118820d79fb8f77d68a468d08d7630ab))
+* privacy policy e2e ([9a87345](https://github.com/M-Fasciano/Next-js-Boilerplate/commit/9a87345be499b8e4e25e9453c6786cdb552dd0d3))
+* removed contact page ([f8318b6](https://github.com/M-Fasciano/Next-js-Boilerplate/commit/f8318b643ade105a0ec768db1202a9132850a38c))
+* sign up ([e0697a9](https://github.com/M-Fasciano/Next-js-Boilerplate/commit/e0697a9974decde481b7a8551df4ffca312d9338))
+* sign up e2e ([f896397](https://github.com/M-Fasciano/Next-js-Boilerplate/commit/f896397311ee6d2922dae8c50b1df5c673f15010))
+* site map e2e ([99a468a](https://github.com/M-Fasciano/Next-js-Boilerplate/commit/99a468adb148daa0309594c057eacb9dcc4ba4e5))
+* terms of use e2e ([ba2e016](https://github.com/M-Fasciano/Next-js-Boilerplate/commit/ba2e016e481ff961cb09e167ce4f535ff1311de3))
+* wip header ([334b5e3](https://github.com/M-Fasciano/Next-js-Boilerplate/commit/334b5e3663b0aea006656756ed68401a14e6dc96))
+* wip refactor header - phase 1 ([a8643b7](https://github.com/M-Fasciano/Next-js-Boilerplate/commit/a8643b7abbb9874a108ca9687e6b8ab3603aa3b8))
+* wip responsive navigation ([4e27731](https://github.com/M-Fasciano/Next-js-Boilerplate/commit/4e27731e0c218c1017fb3aa7e53d183fedbbc624))
+* wip responsive navigation ([c99255e](https://github.com/M-Fasciano/Next-js-Boilerplate/commit/c99255e81c071d7370c470cd7cc5d31ffee20b03))
+
 # [1.3.0](https://github.com/M-Fasciano/Next-js-Boilerplate/compare/v1.2.0...v1.3.0) (2023-08-17)
 
 
