@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 
-import FindATrainer from '@/pages/find-a-trainer';
+import FindATrainer from '@/pages/find-a-trainer/find-a-trainer';
 
 // The easiest solution to mock `next/router`: https://github.com/vercel/next.js/issues/7479
 // The mock has been moved to `__mocks__` folder to avoid duplication
