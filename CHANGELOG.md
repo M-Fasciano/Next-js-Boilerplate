@@ -1,3 +1,17 @@
+# [1.5.0](https://github.com/M-Fasciano/Next-js-Boilerplate/compare/v1.4.0...v1.5.0) (2023-10-04)
+
+
+### Features
+
+* about renamed ([ef39182](https://github.com/M-Fasciano/Next-js-Boilerplate/commit/ef391824ffdc02c16ac44535b11b3aa234d3eef3))
+* cookies renamed ([e948972](https://github.com/M-Fasciano/Next-js-Boilerplate/commit/e94897244a9aa4ad7fac8fd796667f64d173ead2))
+* find a trainer renamed ([d60bae9](https://github.com/M-Fasciano/Next-js-Boilerplate/commit/d60bae9b3be1b51f66a3776771c8cad01f0ff636))
+* help and support renamed ([179c0aa](https://github.com/M-Fasciano/Next-js-Boilerplate/commit/179c0aad04c0d8450f8e7762e2b3dd9cffed2db6))
+* path trainers renamed ([cc47306](https://github.com/M-Fasciano/Next-js-Boilerplate/commit/cc47306fae65a0fb6428a320140e91824858547f))
+* privacy policy renamed ([7d9a469](https://github.com/M-Fasciano/Next-js-Boilerplate/commit/7d9a46969005cd9297378ec3ed65e73374072bd8))
+* site map renamed ([a7e4e1d](https://github.com/M-Fasciano/Next-js-Boilerplate/commit/a7e4e1d726bfc74b69ba8eabde73c5776410914b))
+* terms of use renamed ([b98832b](https://github.com/M-Fasciano/Next-js-Boilerplate/commit/b98832b8a9ab34f83b5fefac079b9ba161dd51ff))
+
 # [1.4.0](https://github.com/M-Fasciano/Next-js-Boilerplate/compare/v1.3.0...v1.4.0) (2023-09-17)
 
 
